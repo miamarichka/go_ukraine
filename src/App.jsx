@@ -1,8 +1,5 @@
-/* eslint-disable no-lone-blocks */
-/* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
-/* eslint-disable arrow-body-style */
-import React, { lazy, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './utils/theme';
