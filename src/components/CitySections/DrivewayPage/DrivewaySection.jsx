@@ -1,8 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
-/* eslint-disable max-len */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios';
@@ -58,8 +53,6 @@ export const DrivewaySection = () => {
 
   useEffect(() => {
     const loadRoutesInfo = async() => {
-      const cityInLowerCase = selectedCity.toLowerCase();
-
       try {
         setIsError(false);
         const cityInfoFromServer = await axios.get('https://64521253bce0b0a0f73bdbe4.mockapi.io/city/routes');

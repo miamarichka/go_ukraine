@@ -1,15 +1,15 @@
-import { ColorRing } from "react-loader-spinner";
+import { Circles } from "react-loader-spinner";
 
 export const LoaderCircle = () => {
     return (
-      <ColorRing
+      <Circles
+        height='300'
+        width='200'
+        color='#025ABB'
+        ariaLabel='circles-loading'
+        wrapperStyle={{ backgroundColor: "transparent" }}
+        wrapperClass=''
         visible={true}
-        height='400'
-        width='400'
-        ariaLabel='blocks-loading'
-        wrapperStyle={{}}
-        wrapperClass='blocks-wrapper'
-        colors={["#025ABB", "#FCD800", "#025ABB", "#FCD800", "#025ABB"]}
-      >Please, wait few seconds</ColorRing>
+      />
     );
 }

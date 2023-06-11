@@ -1,7 +1,3 @@
-/* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router';
@@ -21,8 +17,6 @@ export const HotelsSection = ({ city }) => {
 
   useEffect(() => {
     const loadHotelsInfo = async() => {
-      const cityInLowerCase = selectedCity.toLowerCase();
-
       try {
         setIsError(false);
         const cityInfoFromServer = await axios.get('https://64521253bce0b0a0f73bdbe4.mockapi.io/city/hotels');

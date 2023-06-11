@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
-import { NavCategoryBox } from '../ComponentNavCity/NavLinkCityPages.styled';
-import { NavCategory } from '../ComponentNavCity/NavLinkCityPages';
-import { HomeNav } from '../CityNavigationComponents/HomeNav';
-import { DrivewayNav } from '../CityNavigationComponents/DrivewayNav';
-import { HotelsNav } from '../CityNavigationComponents/HotelsNav';
-import { RestaurantsNav } from '../CityNavigationComponents/RestaurantsNav';
-import { EntertainmentNav } from '../CityNavigationComponents/EntertainmentNav';
+import { NavCategoryBox } from '../CityNavComponent/NavLinkCityPages.styled';
+import { NavCategory } from '../CityNavComponent/NavLinkCityPages';
+import { HomeNav } from '../CityNavigationParts/HomeNav';
+import { DrivewayNav } from '../CityNavigationParts/DrivewayNav';
+import { HotelsNav } from '../CityNavigationParts/HotelsNav';
+import { RestaurantsNav } from '../CityNavigationParts/RestaurantsNav';
+import { EntertainmentNav } from '../CityNavigationParts/EntertainmentNav';
 
 export const Categories = ({ city }) => {
   const { city: cityParam } = useParams();

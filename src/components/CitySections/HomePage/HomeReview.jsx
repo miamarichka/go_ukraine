@@ -1,5 +1,3 @@
-/* eslint-disable react/require-default-props */
-/* eslint-disable max-len */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ReactComponent as Stars } from '../../Icons/Stars.svg';
@@ -46,7 +44,7 @@ export const HomeReview = ({ reviews }) => {
                 {desc}
               </ReviewDescription>
             </DescWrapper>
-            {img.map(picture => <UserImg src={picture} alt="Lutsk" key={picture} />)}
+            {img.map(picture => <UserImg src={picture} alt="" key={picture} />)}
           </ReviewBox>
         );
       })}

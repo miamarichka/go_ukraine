@@ -1,8 +1,10 @@
-import React from 'react';
-import { MainWrapper, ContentWrapper } from './Main.styled';
-import { AsideColums } from './AsideColums';
-import { MainMap } from './MainMap';
-import { Container } from '../../utils/Container.styled';
+/** @format */
+
+import React from "react";
+import { MainWrapper, ContentWrapper } from "./Main.styled";
+import { AsideColums } from "./AsideColums";
+import { MainMap } from "./MainMap";
+import { Container } from "../TemplateComponents/Container.styled";
 
 export const Main = () => (
   <MainWrapper>

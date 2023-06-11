@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable max-len */
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImageGallery from 'react-image-gallery';

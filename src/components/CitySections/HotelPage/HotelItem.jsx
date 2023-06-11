@@ -1,6 +1,3 @@
-/**
- * eslint-disable react/require-default-props
-/* eslint-disable max-len */
 import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import {
@@ -45,7 +42,6 @@ export const HotelItem = ({
   const favoriteContext = useContext(FavoriteContext);
   const isItemfavorite = favoriteContext.isItemFavorite;
   const [isFavorite, setIsFavorite] = useState(isItemfavorite(id));
-
 
   const clickHandler = () => {
     if (isFavorite) {

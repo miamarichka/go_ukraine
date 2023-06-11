@@ -13,6 +13,5 @@ export const NavCategory = ({ to, element }) => (
 
 NavCategory.propTypes = {
   to: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/require-default-props
   element: PropTypes.element,
 };

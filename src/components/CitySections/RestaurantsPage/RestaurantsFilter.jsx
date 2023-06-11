@@ -1,6 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/button-has-type */
 import classNames from 'classnames';
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';

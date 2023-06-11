@@ -1,8 +1,6 @@
-/* eslint-disable react/require-default-props */
-/* eslint-disable max-len */
-import React, { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
-import { BtnStyled } from '../../../utils/buttonStyled';
+import React, { useContext, useState } from "react";
+import PropTypes from "prop-types";
+import { BtnStyled } from "../../TemplateComponents/buttonStyled";
 import {
   CuisinesItem,
   CuisinesList,
@@ -21,11 +19,11 @@ import {
   ShortDescList,
   SpanPoint,
   StarsSvg,
-} from './RestaurantItem.styled';
-import FavoriteContext from '../../../api/context/favoriteContext';
-import { useAuth } from '../../../api/zustand/useAuth';
-import { cutTextDesc, getRandomRating } from '../../../utils/functionsHelpers';
-import { useSearchParams} from 'react-router-dom';
+} from "./RestaurantItem.styled";
+import FavoriteContext from "../../../api/context/favoriteContext";
+import { useAuth } from "../../../api/zustand/useAuth";
+import { cutTextDesc, getRandomRating } from "../../../utils/functionsHelpers";
+import { useSearchParams } from "react-router-dom";
 
 export const RestaurantItem = ({
   image,

@@ -34,7 +34,7 @@ export const LoginForm = () => {
   }, [reset]);
 
   const schema = yup.object().shape({
-    email: yup.string().email().required(),
+    email: yup.string().min(4).email().required(),
     password: yup.string().min(6).max(16).required(),
   });
 
@@ -46,6 +46,10 @@ export const LoginForm = () => {
   const SubmitHandler = async (values) => {
     logIn(values);
   };
+
+  const loginBtnHandler = () => {
+    hasntAccount();
+  }
 
   return (
     <FormContainer>
@@ -72,8 +76,7 @@ export const LoginForm = () => {
               name='password'
               placeholder='Password'
             />
-            {isExist && (
-                <NotificationFailed message={"Wrong password"} />)}
+            {isExist && <NotificationFailed message={"Wrong password"} />}
             <ErrorMessage name='password' component='div' />
           </label>
           <LabelRememberMe htmlFor='rememberMe' className='rememberMe'>
@@ -96,7 +99,7 @@ export const LoginForm = () => {
             <ButtonSubmit type='submit'>Log In</ButtonSubmit>
             <InnerTextWrap>
               <InnerSpanQuestion>Don`t have an account?</InnerSpanQuestion>
-              <InnerButtonLink type='button' onClick={() => hasntAccount()}>
+              <InnerButtonLink type='button' onClick={loginBtnHandler}>
                 Sign Up here
               </InnerButtonLink>
             </InnerTextWrap>

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import axios from 'axios';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
@@ -13,15 +12,17 @@ const authStore = persist(
     isLoading: false,
     isError: null,
     users: [],
+    userReviews: [],
     registration: async (userData) => {
       try {
         set({ isLoading: true, isError: null })
         const response = await axios.post("https://64521253bce0b0a0f73bdbe4.mockapi.io/city/users", userData)
         if (response) {
           set(state => ({
-            currentUser: response.data[0],
-            users: [...state.users, response.data[0]],
+            currentUser: response.data,
+            users: [...state.users, response.data],
             isLoggedIn: true,
+            isExist: true,
           }))
         }
       } catch (error) {
@@ -31,7 +32,7 @@ const authStore = persist(
           isError: error,
         })
       } finally {
-        set(({ isLoading: false }))
+        set({ isLoading: false })
       }
     },
     uploadPicture: file => {
@@ -42,22 +43,17 @@ const authStore = persist(
       try {
         set({ isLoading: true, isError: null })
         const id = get().currentUser.id;
-        console.log(get().currentUser);
+
         const response = await axios.put(`https://64521253bce0b0a0f73bdbe4.mockapi.io/city/users/${id}`, newData)
         if (response) {
-          set(state => ({
-            currentUser: response.data,
-            users: state.users.map(user => {
-              return user.id === id ? response.data : user
-            }),
-          }))
+          await set({currentUser: response.data})
         }
       } catch (error) {
         set({
           isError: error,
         })
       } finally {
-        set(({ isLoading: false }))
+        set({ isLoading: false })
       }
     },
     hasAccount: () => set({ isHasAccount: true }),
@@ -94,7 +90,7 @@ const authStore = persist(
           isError: error,
         })
       } finally {
-        set(({ isLoading: false }))
+        set({ isLoading: false })
       }
     },
     reset: () => set({ isExist: false}),
@@ -102,8 +98,11 @@ const authStore = persist(
       currentUser: null,
       isLoggedIn: false,
       userImg: null,
-      isHasAccount: false,
+      isExist: false,
     }),
+    postReview: async (reviewToPost) => {
+      
+    }
   }),
   {
     name: 'authStore',

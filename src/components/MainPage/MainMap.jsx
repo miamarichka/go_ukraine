@@ -1,35 +1,31 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link, useParams } from 'react-router-dom';
 import React from 'react';
 import classNames from 'classnames';
-import { ReactComponent as Chernihiv } from '../../RegionIcons/Chernihiv.svg';
-import { ReactComponent as Chernivtsi } from '../../RegionIcons/Chernivtsi.svg';
-import { ReactComponent as Kropyvnytskyi } from '../../RegionIcons/Kropyvnytskyi.svg';
-import { ReactComponent as Dnipro } from '../../RegionIcons/Dnipro.svg';
-import { ReactComponent as IvanoFransivsk } from '../../RegionIcons/Ivano-Frankivsk.svg';
-import { ReactComponent as Kharkiv } from '../../RegionIcons/Kharkiv.svg';
-import { ReactComponent as Kmelnytskiy } from '../../RegionIcons/Khmelnytskyi.svg';
-import { ReactComponent as Kyiv } from '../../RegionIcons/Kyiv.svg';
-import { ReactComponent as Luhansk } from '../../RegionIcons/Luhansk.svg';
-import { ReactComponent as Lutsk } from '../../RegionIcons/Lutsk.svg';
-import { ReactComponent as Lviv } from '../../RegionIcons/Lviv.svg';
-import { ReactComponent as Odesa } from '../../RegionIcons/Odesa.svg';
-import { ReactComponent as Poltava } from '../../RegionIcons/Poltava.svg';
-import { ReactComponent as Rivne } from '../../RegionIcons/Rivne.svg';
-import { ReactComponent as Simfiropol } from '../../RegionIcons/Simfiropol.svg';
-import { ReactComponent as Sumy } from '../../RegionIcons/Sumy.svg';
-import { ReactComponent as Ternopil } from '../../RegionIcons/Ternopil.svg';
-import { ReactComponent as Uzhhorod } from '../../RegionIcons/Uzhhorod.svg';
-import { ReactComponent as Vinnytsia } from '../../RegionIcons/Vinnytsia.svg';
-import { ReactComponent as Zaporizhia } from '../../RegionIcons/Zaporizhia.svg';
-import { ReactComponent as Zhytomyr } from '../../RegionIcons/Zhytomyr.svg';
-import { ReactComponent as Cherkasy } from '../../RegionIcons/Cherkasy.svg';
-import { ReactComponent as Mykolayiv } from '../../RegionIcons/Mykolaiv.svg';
-import { ReactComponent as Kherson } from '../../RegionIcons/Kherson.svg';
-import { ReactComponent as Donetsk } from '../../RegionIcons/Donetsk.svg';
+import { ReactComponent as Chernihiv } from '../../regionIcons/Chernihiv.svg';
+import { ReactComponent as Chernivtsi } from '../../regionIcons/Chernivtsi.svg';
+import { ReactComponent as Kropyvnytskyi } from '../../regionIcons/Kropyvnytskyi.svg';
+import { ReactComponent as Dnipro } from '../../regionIcons/Dnipro.svg';
+import { ReactComponent as IvanoFransivsk } from '../../regionIcons/Ivano-Frankivsk.svg';
+import { ReactComponent as Kharkiv } from '../../regionIcons/Kharkiv.svg';
+import { ReactComponent as Kmelnytskiy } from '../../regionIcons/Khmelnytskyi.svg';
+import { ReactComponent as Kyiv } from '../../regionIcons/Kyiv.svg';
+import { ReactComponent as Luhansk } from '../../regionIcons/Luhansk.svg';
+import { ReactComponent as Lutsk } from '../../regionIcons/Lutsk.svg';
+import { ReactComponent as Lviv } from '../../regionIcons/Lviv.svg';
+import { ReactComponent as Odesa } from '../../regionIcons/Odesa.svg';
+import { ReactComponent as Poltava } from '../../regionIcons/Poltava.svg';
+import { ReactComponent as Rivne } from '../../regionIcons/Rivne.svg';
+import { ReactComponent as Simfiropol } from '../../regionIcons/Simfiropol.svg';
+import { ReactComponent as Sumy } from '../../regionIcons/Sumy.svg';
+import { ReactComponent as Ternopil } from '../../regionIcons/Ternopil.svg';
+import { ReactComponent as Uzhhorod } from '../../regionIcons/Uzhhorod.svg';
+import { ReactComponent as Vinnytsia } from '../../regionIcons/Vinnytsia.svg';
+import { ReactComponent as Zaporizhia } from '../../regionIcons/Zaporizhia.svg';
+import { ReactComponent as Zhytomyr } from '../../regionIcons/Zhytomyr.svg';
+import { ReactComponent as Cherkasy } from '../../regionIcons/Cherkasy.svg';
+import { ReactComponent as Mykolayiv } from '../../regionIcons/Mykolaiv.svg';
+import { ReactComponent as Kherson } from '../../regionIcons/Kherson.svg';
+import { ReactComponent as Donetsk } from '../../regionIcons/Donetsk.svg';
 import { RegionList, RegionItem, MainText, SubText, TextWrapper, MapWrapper } from './MainMap.styled';
 
 export const MainMap = () => {

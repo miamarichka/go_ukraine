@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 import React from 'react';
-import { Formik, ErrorMessage, Field } from 'formik';
+import { Formik, ErrorMessage} from 'formik';
 import * as yup from 'yup';
 import { FormStyled, FieldStyled, FormContainer,
   FormHeader, SpanLine, SpanText,

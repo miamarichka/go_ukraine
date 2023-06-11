@@ -10,8 +10,8 @@ import {
   TitleWrapper,
 } from "./SavedPage.styled";
 import { useContext} from "react";
-import { HotelItem } from "../../componentCitySections/HotelPage/HotelItem";
-import { RestaurantItem } from "../../componentCitySections/RestaurantsPage/RestaurantItem";
+import { HotelItem } from "../../CitySections/HotelPage/HotelItem";
+import { RestaurantItem } from "../../CitySections/RestaurantsPage/RestaurantItem";
 import { NotificationInfo } from "../../Notification/Notifications";
 
 const cities = [

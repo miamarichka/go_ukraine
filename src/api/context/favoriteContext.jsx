@@ -16,18 +16,7 @@ export const FavoriteProvider = ({ children }) => {
    }
  };
 
-
-// const removeFavoriteItem = (itemId, category) => {
-//   setFavoriteItems((prevItems) => {
-//     const updatedItems = prevItems.filter(
-//       (item) => {console.log(item.category, category)
-//         return (item.category === category) && (item.id !== itemId)
-//       }
-//     );
-//     return updatedItems;
-//   });
-// };
-const removeFavoriteItem = (itemId, category) => {
+const removeFavoriteItem = (itemId) => {
   setFavoriteItems((prevItems) => {
     const updatedItems = prevItems.filter((item) => item.id !== itemId);
     return updatedItems;

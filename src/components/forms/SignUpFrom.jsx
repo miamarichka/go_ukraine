@@ -8,10 +8,12 @@ import { FormStyled, FieldStyled, FormContainer,
   InnerSpanQuestion, InnerButtonLink,
   InnerTextWrap } from './SignUpForm.styled';
 import { SocialMediaEnter } from './SocialMediaEnter';
+import { useAuth } from '../../api/zustand/useAuth';
 
 export const SignUpForm = () => {
   const registerUser = useStore((state) => state.registration);
   const hasAccount = useStore(state => state.hasAccount);
+  const {isLoading} = useAuth()
 
   const schema = yup.object().shape({
     name: yup.string().required(),
@@ -25,8 +27,9 @@ export const SignUpForm = () => {
     password: '',
   };
 
-  const SubmitHandler = async(values) => {
-    registerUser(values);
+  const SubmitHandler = async (values) => {
+      registerUser(values);
+      hasAccount();
   };
 
   return (
@@ -35,47 +38,40 @@ export const SignUpForm = () => {
       <Formik
         validationSchema={schema}
         initialValues={initialValues}
-        onSubmit={SubmitHandler}
-      >
+        onSubmit={SubmitHandler}>
         <FormStyled>
-          <label htmlFor="name">
-            <FieldStyled
-              id="name"
-              type="text"
-              name="name"
-              placeholder="Name"
-            />
-            <ErrorMessage name="name" component="div" />
+          <label htmlFor='name'>
+            <FieldStyled id='name' type='text' name='name' placeholder='Name' />
+            <ErrorMessage name='name' component='div' />
           </label>
-          <label htmlFor="email">
+          <label htmlFor='email'>
             <FieldStyled
-              id="email"
-              type="email"
-              name="email"
-              placeholder="Email"
+              id='email'
+              type='email'
+              name='email'
+              placeholder='Email'
             />
-            <ErrorMessage name="email" component="div" />
+            <ErrorMessage name='email' component='div' />
           </label>
 
-          <label htmlFor="password">
+          <label htmlFor='password'>
             <FieldStyled
-              id="password"
-              type="password"
-              name="password"
-              placeholder="Password"
+              id='password'
+              type='password'
+              name='password'
+              placeholder='Password'
             />
-            <ErrorMessage name="password" component="div" />
+            <ErrorMessage name='password' component='div' />
           </label>
-          <LabelRememberMe htmlFor="rememberMe" className="rememberMe">
+          <LabelRememberMe htmlFor='rememberMe' className='rememberMe'>
             <FieldStyled
-              className="rememberMe"
-              id="rememberMe"
-              type="checkbox"
-              name="rememberMe"
-            />
-            {' '}
+              className='rememberMe'
+              id='rememberMe'
+              type='checkbox'
+              name='rememberMe'
+            />{" "}
             Remember me
-            <ErrorMessage name="rememberMe" component="div" />
+            <ErrorMessage name='rememberMe' component='div' />
           </LabelRememberMe>
           <InnerWrapMedia>
             <SpanWrap>
@@ -84,17 +80,12 @@ export const SignUpForm = () => {
               <SpanLine />
             </SpanWrap>
             <SocialMediaEnter />
-            <ButtonSubmit type="submit">
+            <ButtonSubmit type='submit' disabled={isLoading}>
               Sign Up
             </ButtonSubmit>
             <InnerTextWrap>
-              <InnerSpanQuestion>
-                Already have an account?
-              </InnerSpanQuestion>
-              <InnerButtonLink
-                type="button"
-                onClick={() => hasAccount()}
-              >
+              <InnerSpanQuestion>Already have an account?</InnerSpanQuestion>
+              <InnerButtonLink type='button' onClick={() => hasAccount()}>
                 Log In here
               </InnerButtonLink>
             </InnerTextWrap>

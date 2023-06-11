@@ -1,15 +1,17 @@
-import styled from 'styled-components';
-import { Container } from '../../../utils/Container.styled';
+/** @format */
+
+import styled from "styled-components";
+import { Container } from "../../TemplateComponents/Container.styled";
 
 export const SavedContainer = styled(Container)`
   text-align: center;
 `;
 
 export const TitleWrapper = styled.div`
-display: flex;
-justify-content: flex-start;
-gap: 540px;
-margin-bottom: 70px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 540px;
+  margin-bottom: 70px;
 `;
 
 export const PageTitle = styled.p`
