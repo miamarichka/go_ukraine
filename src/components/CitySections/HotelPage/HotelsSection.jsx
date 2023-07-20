@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router';
 import { HotelList } from './HotelList';
-import { InputSection } from './InputSection';
 import { Loader } from '../../Loader/Loader';
 import { Notification } from '../../Notification/Notifications';
 import { toast } from 'react-toastify';
@@ -47,7 +46,6 @@ export const HotelsSection = ({ city }) => {
       {!hotelData && isLoading && <Loader />}
       {hotelData && (
         <div>
-          <InputSection />
           <HotelList hotels={hotelData} />
         </div>
       )}

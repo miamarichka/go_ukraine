@@ -17,6 +17,7 @@ import { LogOutPage } from "./components/HeaderPages/AccountPage/LogOut";
 import {SavedPage} from "./components/HeaderPages/SavedPage/SavedPage";
 import { PrivateRoute } from "./privateRoutes/PrivateRoutes";
 import { useAuthStore } from "./api/zustand/authStore";
+import { FavoriteProvider } from "./api/context/favoriteContext";
 
 export const App = () => {
   const { isRefreshing } = useAuthStore();
@@ -28,7 +29,7 @@ export const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <FavoriteProvider> */}
+      <FavoriteProvider>
       <Suspense fallback={<Loader />}>
        {isRefreshing ? "refresing" :(
         <Routes>
@@ -62,7 +63,7 @@ export const App = () => {
         </Routes>
         )}
       </Suspense>
-      {/* </FavoriteProvider> */}
+      </FavoriteProvider>
     </ThemeProvider>
   );
 };
