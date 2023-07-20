@@ -1,6 +1,6 @@
 # Go Ukraine
 
-This is a Go Ukraine web application built using React, Zustand, Axios, React Router, Yup, Formik, and Styled Components. The application is hosted on Netlify. It provides users with an interactive map of Ukraine where they can click on a selected city to access a page containing a brief description of the city, its photos, user reviews, and navigation to other sections such as hotels, restaurants, transportation, and attractions.
+This is a Go Ukraine web application built using React, Node.js, Express, MongoDB, Mongoose, Multer, Cloudinary, Zustand, Axios, React Router, Yup, Formik, and Styled Components. The application is hosted on Netlify. It provides users with an interactive map of Ukraine where they can click on a selected city to access a page containing a brief description of the city, its photos, user reviews, and navigation to other sections such as hotels, restaurants, transportation, and attractions.
 
 ## Features
 #Interactive Map: Users can explore Ukraine's cities on an interactive map and click on a city to access detailed information about it.
