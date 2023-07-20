@@ -21,7 +21,7 @@ import { Loader } from "../../Forms/EditProfileForm.styled";
 import { LoaderCircle } from "../../Loader/LoaderCircle";
 
 export const Account = () => {
-  const { user, isLoading } = useAuth();
+  const { user } = useAuth();
   const [isFormatErr, setIsFormatErr] = useState(false);
   const [isImgUpdating, setIsImgUpdating] = useState(false);
 
