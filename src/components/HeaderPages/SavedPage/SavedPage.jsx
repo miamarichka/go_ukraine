@@ -12,7 +12,6 @@ import {
 import { useContext} from "react";
 import { HotelItem } from "../../CitySections/HotelPage/HotelItem";
 import { RestaurantItem } from "../../CitySections/RestaurantsPage/RestaurantItem";
-import { NotificationInfo } from "../../Notification/Notifications";
 
 const cities = [
   "Kyiv",
@@ -43,7 +42,7 @@ const cities = [
   "Simferopol",
 ];
 
-const SavedPage = () => {
+export const SavedPage = () => {
   const navigation = useNavigate();
   const favoriteContext = useContext(FavoriteContext);
 
@@ -108,11 +107,10 @@ const SavedPage = () => {
         </div>
       ) : (
         <div>
-          <NotificationInfo message={"You haven`t saved any items"} />
+          You haven't saved any items yet...
         </div>
       )}
     </SavedContainer>
   );
 };
 
-export default SavedPage;

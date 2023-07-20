@@ -14,7 +14,8 @@ import {
   TransportTitle,
 } from './Driveway.styled';
 import { Loader } from '../../Loader/Loader';
-import { NotificationFailed } from '../../Notification/Notifications';
+import { Notification } from '../../Notification/Notifications';
+import { toast } from 'react-toastify';
 
 const MapLink = ({ city }) => {
   const handleMapLinkClick = (e) => {
@@ -62,6 +63,7 @@ export const DrivewaySection = () => {
         }
       } catch {
         setIsError(true);
+        toast.error("Can`t get route information");
       } finally {
         setIsLoading(false);
         setIsError(false);
@@ -77,7 +79,7 @@ export const DrivewaySection = () => {
 
   return (
     <DrivewayPageWrapper>
-      {isError && <NotificationFailed message={"Can`t get route information"} />}
+      {isError && <Notification/>}
       {!routeData && isLoading && <Loader />}
       <DriveWayTitle>Map your way with Google Maps</DriveWayTitle>
       <DrivewayWrapper>

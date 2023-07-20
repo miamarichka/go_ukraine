@@ -3,8 +3,9 @@ import YouTube from "react-youtube";
 import { FrameWrapper } from "./EntertainmentSection.styled";
 import { useParams } from "react-router";
 import { Loader } from "../../Loader/Loader";
-import { NotificationFailed } from "../../Notification/Notifications";
+import { Notification } from "../../Notification/Notifications";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const videoOptions = {
   width: "1400",
@@ -38,6 +39,7 @@ export const EntertainmentSection = ({city}) => {
         }
       } catch {
         setIsError(true);
+        toast.error("Can't get entertainment information");
       } finally {
         setIsLoading(false);
         setIsError(false);
@@ -54,7 +56,7 @@ export const EntertainmentSection = ({city}) => {
   return (
     <>
       {isError && (
-        <NotificationFailed message={"Can't get entertainment information"} />
+        <Notification />
       )}
       {!videoId && isLoading && <Loader />}
       {videoId && (

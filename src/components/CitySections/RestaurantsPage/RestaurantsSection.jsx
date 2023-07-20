@@ -4,7 +4,8 @@ import axios from 'axios';
 import { RestaurantsFilter } from './RestaurantsFilter';
 import { RestaurantList } from './RestaurantsList';
 import { Loader } from '../../Loader/Loader';
-import { NotificationFailed } from '../../Notification/Notifications';
+import { Notification } from '../../Notification/Notifications';
+import { toast } from 'react-toastify';
 
 export const RestaurantsSection = ({ city }) => {
   const [restaurauntData, setRestaurauntData] = useState(null);
@@ -26,6 +27,7 @@ export const RestaurantsSection = ({ city }) => {
         }
       } catch {
         setIsError(true);
+        toast.error("Can` get restauraunts information");
       } finally {
         setIsLoading(false);
         setIsError(false);
@@ -42,7 +44,7 @@ export const RestaurantsSection = ({ city }) => {
   return (
     <div>
       {isError && (
-        <NotificationFailed message={"Can` get restauraunts information"} />
+        <Notification/>
       )}
       {!restaurauntData && isLoading && <Loader />}
       {restaurauntData && (

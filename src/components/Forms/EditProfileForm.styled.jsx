@@ -21,8 +21,8 @@ margin-bottom: 62px;
 `;
 
 export const FieldStyledBorder = styled(FieldStyled)`
-border: solid 2px black;
-border-radius: 5px;
+  border: solid 2px black;
+  border-radius: 5px;
 `;
 
 export const LabelPSW = styled.label`
@@ -41,4 +41,9 @@ position: absolute;
 top: 50%;
 right: 33%;
 transform: translate(-50%, -50%);
+`;
+
+export const Loader = styled.div`
+width: 300px;
+margin: auto;
 `;

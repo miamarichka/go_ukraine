@@ -1,19 +1,20 @@
-import { useStore } from './authStore';
+import { useAuthStore } from './authStore';
 
 export const selectIsLoggedIn = state => state.isLoggedIn;
 export const selectUser = state => state.currentUser;
 export const selectPicture = state => state.userImg;
 export const selectIsHasAccount = state => state.isHasAccount;
-export const selectIsExist = state => state.isExist;
+export const selectIsRefreshing = state => state.isRefreshing;
 export const selectIsLoading = state => state.isLoading;
 export const selectIsError = state => state.isError;
+export const selectIsToken = state => state.token;
 
 export const useAuth = () => ({
-  isLoggedIn: useStore(selectIsLoggedIn),
-  user: useStore(selectUser),
-  picture: useStore(selectPicture),
-  isHasAccount: useStore(selectIsHasAccount),
-  isExist: useStore(selectIsExist),
-  isLoading: useStore(selectIsLoading),
-  isError: useStore(selectIsError),
+  isLoggedIn: useAuthStore(selectIsLoggedIn),
+  user: useAuthStore(selectUser),
+  isHasAccount: useAuthStore(selectIsHasAccount),
+  isRefreshing: useAuthStore(selectIsRefreshing),
+  isLoading: useAuthStore(selectIsLoading),
+  isError: useAuthStore(selectIsError),
+  token: useAuthStore(selectIsToken),
 });

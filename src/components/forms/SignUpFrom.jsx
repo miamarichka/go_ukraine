@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
-import { useStore } from '../../api/zustand/authStore';
+import { useAuthStore } from '../../api/zustand/authStore';
 import { FormStyled, FieldStyled, FormContainer,
   FormHeader, LabelRememberMe, SpanLine, SpanText,
   SpanWrap, ButtonSubmit, InnerWrapMedia,
@@ -9,15 +9,26 @@ import { FormStyled, FieldStyled, FormContainer,
   InnerTextWrap } from './SignUpForm.styled';
 import { SocialMediaEnter } from './SocialMediaEnter';
 import { useAuth } from '../../api/zustand/useAuth';
+import { EMAIL_REGEX } from '../../utils/patterns';
+import { Notification} from '../Notification/Notifications';
+import { toast } from "react-toastify";
 
 export const SignUpForm = () => {
-  const registerUser = useStore((state) => state.registration);
-  const hasAccount = useStore(state => state.hasAccount);
-  const {isLoading} = useAuth()
+  const registerUser = useAuthStore((state) => state.registration);
+  const hasAccount = useAuthStore(state => state.hasAccount);
+  const { isError, isLoading } = useAuth();
 
   const schema = yup.object().shape({
-    name: yup.string().required(),
-    email: yup.string().email().required(),
+    name: yup
+      .string()
+      .min(3)
+      .max(30)
+      .required(),
+    email: yup
+      .string()
+      .email()
+      .matches(EMAIL_REGEX, "Invalid email")
+      .required(),
     password: yup.string().min(6).max(16).required(),
   });
 
@@ -28,13 +39,20 @@ export const SignUpForm = () => {
   };
 
   const SubmitHandler = async (values) => {
-      registerUser(values);
+    await registerUser(values);
+    if (isError) {
       hasAccount();
+    } else {
+      toast.error("Incorrect data");
+      }
   };
+
+  const showError = isError && !isLoading;
 
   return (
     <FormContainer>
       <FormHeader>Create Account</FormHeader>
+      {showError && <Notification/>}
       <Formik
         validationSchema={schema}
         initialValues={initialValues}

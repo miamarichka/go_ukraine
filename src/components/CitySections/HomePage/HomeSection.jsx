@@ -36,7 +36,6 @@ export const HomeSection = ({ city }) => {
           setReviewData(cityReviewsFromServer.data);
         }
       } catch {
-        console.log('serverdata error', console.error());
         setIsError(true);
       } finally {
         setIsLoading(false);

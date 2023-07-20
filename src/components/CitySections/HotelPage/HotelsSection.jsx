@@ -4,7 +4,8 @@ import { useParams } from 'react-router';
 import { HotelList } from './HotelList';
 import { InputSection } from './InputSection';
 import { Loader } from '../../Loader/Loader';
-import { NotificationFailed } from '../../Notification/Notifications';
+import { Notification } from '../../Notification/Notifications';
+import { toast } from 'react-toastify';
 
 
 export const HotelsSection = ({ city }) => {
@@ -26,6 +27,7 @@ export const HotelsSection = ({ city }) => {
         }
       } catch {
         setIsError(true);
+        toast.error("Can` get hotels information");
       } finally {
         setIsLoading(false);
         setIsError(false);
@@ -41,7 +43,7 @@ export const HotelsSection = ({ city }) => {
 
   return (
     <>
-      {isError && <NotificationFailed message={"Can` get hotels information"}/>}
+      {isError && <Notification/>}
       {!hotelData && isLoading && <Loader />}
       {hotelData && (
         <div>

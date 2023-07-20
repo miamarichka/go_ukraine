@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
 import {
@@ -17,24 +17,23 @@ import {
   InnerTextWrap,
 } from "./SignUpForm.styled";
 import { SocialMediaEnter } from "./SocialMediaEnter";
-import { useStore } from "../../api/zustand/authStore";
+import { useAuthStore } from "../../api/zustand/authStore";
 import { useAuth } from "../../api/zustand/useAuth";
-import { NotificationFailed } from "../Notification/Notifications";
+import { EMAIL_REGEX } from "../../utils/patterns";
+import { Notification } from "../Notification/Notifications";
+import { toast } from "react-toastify";
 
 export const LoginForm = () => {
-  const logIn = useStore((state) => state.logIn);
-  const hasntAccount = useStore((state) => state.hasntAccount);
-  const reset = useStore((state) => state.reset);
-  const { isExist } = useAuth();
-
-  useEffect(() => {
-    return () => {
-      reset();
-    };
-  }, [reset]);
+  const { isError, isLoading } = useAuth();
+  const logIn = useAuthStore((state) => state.logIn);
+  const hasntAccount = useAuthStore((state) => state.hasntAccount);
 
   const schema = yup.object().shape({
-    email: yup.string().min(4).email().required(),
+    email: yup
+      .string()
+      .email()
+      .matches(EMAIL_REGEX, "Invalid email")
+      .required(),
     password: yup.string().min(6).max(16).required(),
   });
 
@@ -44,16 +43,22 @@ export const LoginForm = () => {
   };
 
   const SubmitHandler = async (values) => {
-    logIn(values);
+    await logIn(values);
+    if (isError) {
+       toast.error("Email or password wrong");
+    }
   };
 
   const loginBtnHandler = () => {
     hasntAccount();
   }
 
+const showError = isError && !isLoading
+
   return (
     <FormContainer>
       <FormHeader>Welcome Back</FormHeader>
+      {showError && <Notification />}
       <Formik
         validationSchema={schema}
         initialValues={initialValues}
@@ -76,7 +81,6 @@ export const LoginForm = () => {
               name='password'
               placeholder='Password'
             />
-            {isExist && <NotificationFailed message={"Wrong password"} />}
             <ErrorMessage name='password' component='div' />
           </label>
           <LabelRememberMe htmlFor='rememberMe' className='rememberMe'>
