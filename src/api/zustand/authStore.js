@@ -94,6 +94,7 @@ const authStore = persist(
 
         if (response.status === 200) {
           set({ userImg: response.data.avatarURL });
+          return response.data.avatarURL;
         }
       } catch (error) {
         set({

@@ -24,6 +24,7 @@ export const Account = () => {
   const { user } = useAuth();
   const [isFormatErr, setIsFormatErr] = useState(false);
   const [isImgUpdating, setIsImgUpdating] = useState(false);
+  const [avatar, setAvatar] = useState(user.avatar || '');
 
   const navigation = useNavigate();
 
@@ -42,8 +43,9 @@ export const Account = () => {
   const formData = new FormData();
   formData.append("avatar", e.target.files[0]);
 
-    await uploadImg(formData);
+    const newUrl = await uploadImg(formData);
     setIsImgUpdating(false);
+    setAvatar(newUrl);
   };
 
   return (
@@ -63,7 +65,7 @@ export const Account = () => {
           ) : (
             <>
               {isFormatErr && <Notification />}
-              <ProfileImg src={user.avatar || ""} alt='' accept='image/*' />
+              <ProfileImg src={avatar || ""} alt='' accept='image/*' />
               <form action='' encType='multipart/form-data'>
                 <input
                   type='file'

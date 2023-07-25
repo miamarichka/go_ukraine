@@ -6,23 +6,25 @@ border:none;
 `;
 
 export const ProfileImg = styled.img`
-width: 225px;
-height: 225px;
-border-radius: 50%;
-margin: auto;
-margin-bottom: 16px;
-border: 4px solid transparent;
-background-image: linear-gradient(to top,
-    ${props => props.theme.colors.yellow} 50%, 
-    ${props => props.theme.colors.blue} 50%);
-background-origin: border-box;
-padding: 4px;
+  width: 225px;
+  height: 225px;
+  border-radius: 50%;
+  margin: auto;
+  margin-bottom: 16px;
+  background-image: linear-gradient(
+    to top,
+    ${(props) => props.theme.colors.yellow} 50%,
+    ${(props) => props.theme.colors.blue} 50%
+  );
+  background-origin: border-box;
+  transform: translateZ(0);
+  background-clip: padding-box;
+  box-shadow: 0 0 0 4px ${(props) => props.theme.colors.blue},
+    0 0 0 8px ${(props) => props.theme.colors.yellow};
 `;
 
 export const TitleWrapper = styled.div`
-display: flex;
-justify-content: flex-start;
-gap: 540px;
+  margin-bottom: 10px;
 `;
 
 export const TitleAccount = styled.h1`
