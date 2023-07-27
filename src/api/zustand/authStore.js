@@ -96,7 +96,10 @@ const authStore = persist(
         );
 
         if (response.status === 200) {
-          set({ userImg: response.data.avatarURL });
+          set({
+            currentUser: { ...get().currentUser, avatar: response.data.avatarURL },
+          });
+
           return response.data.avatarURL;
         }
       } catch {
@@ -169,7 +172,12 @@ const authStore = persist(
         if (responce.status === 200) {
           clearAuthHeader();
           set({
-            currentUser: null,
+            currentUser: {
+            name: null,
+            email: null,
+            password: null,
+            avatar: '',
+          },
             token: null,
             isLoggedIn: false,
           })

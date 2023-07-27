@@ -25,6 +25,9 @@ export const Account = () => {
 
   const { isRefreshing } = useAuthStore();
   const refreshing = useAuthStore((state) => state.refreshUser);
+    const [isFormatErr, setIsFormatErr] = useState(false);
+    const [isImgUpdating, setIsImgUpdating] = useState(false);
+    const [avatar, setAvatar] = useState(user.avatar || "");
 
   useEffect(() => {
     async function fetchData() {
@@ -36,10 +39,6 @@ export const Account = () => {
     fetchData();
   }, [refreshing]);
 
-  const [isFormatErr, setIsFormatErr] = useState(false);
-  const [isImgUpdating, setIsImgUpdating] = useState(false);
-  const [avatar, setAvatar] = useState(user.avatar || '');
-
   const navigation = useNavigate();
 
   const uploadImg = useAuthStore((state) => state.uploadPicture);
@@ -47,12 +46,9 @@ export const Account = () => {
   const inputUploadHandler = async(e) => {
     setIsFormatErr(false);
 
-    if (
-      e.target.files[0].type !== "image/jpeg"
-      ||e.target.files[0].type !== "image/png"
-    ) {
+    if (e.target.files[0].type !== "image/jpeg") {
       setIsFormatErr(true);
-      toast.error("Upload only images");
+      toast.error("Upload only JPG images");
       return;
     };
 
