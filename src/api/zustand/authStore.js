@@ -16,7 +16,7 @@ const authStore = persist(
       name: null,
       email: null,
       password: null,
-      avatar: null,
+      avatar: '',
     },
     token: null,
     isLoggedIn: false,
@@ -145,26 +145,14 @@ const authStore = persist(
         set({ isLoading: true, isError: false });
         const responce = await axios.get('https://go-ukraine-users.onrender.com/api/v1/users/current');
         if (responce.status === 200) {
-
-          if (responce.data.avatarURL) {
-            set({
-              isLoggedIn: true,
-              currentUser: {
-                name: responce.data.name,
-                email: responce.data.email,
-                avatar: responce.data.avatarURL,
-              },
-            });
-            return responce.data.avatarURL
-          } else {
-            set({
-              isLoggedIn: true,
-              currentUser: {
-                name: responce.data.name,
-                email: responce.data.email,
-              },
-            });
-          }
+          const { data } = responce;
+          const currentUser = {
+            name: data.name,
+            email: data.email,
+            avatar: data.avatarURL || '',
+          };
+          set({ isLoggedIn: true, currentUser });
+          return data.avatarURL;
         }
       } catch {
         set({

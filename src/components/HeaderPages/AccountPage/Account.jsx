@@ -91,7 +91,7 @@ export const Account = () => {
                       name='avatar'
                       onChange={inputUploadHandler}
                       hidden />
-                    <LabelImg htmlFor='avatar'>Choose image</LabelImg>
+                    <LabelImg htmlFor='avatar'>Edit image</LabelImg>
                   </form>
                 </>
               )}
