@@ -68,7 +68,8 @@ export const Account = () => {
   return (
       isRefreshing ? ('refreshing...'
       ) : (
-          <><Container>
+        <>
+          <Container>
             <TitleWrapper>
               <BackButton onClick={() => navigation(-1)}>
                 <ArrowLeft />

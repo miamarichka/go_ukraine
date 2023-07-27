@@ -120,7 +120,7 @@ const authStore = persist(
         }
       } catch {
         set({
-          isError: false,
+          isError: true,
         });
       } finally {
         set({ isLoading: false });
