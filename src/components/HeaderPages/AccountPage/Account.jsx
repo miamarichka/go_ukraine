@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { ReactComponent as ArrowLeft } from "../../Icons/Arrow-left.svg";
 import {
@@ -22,6 +22,20 @@ import { LoaderCircle } from "../../Loader/LoaderCircle";
 
 export const Account = () => {
   const { user } = useAuth();
+
+  const { isRefreshing } = useAuthStore();
+  const refreshing = useAuthStore((state) => state.refreshUser);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await refreshing();
+      if (response) {
+        setAvatar(response);
+      }
+    }
+    fetchData();
+  }, [refreshing]);
+
   const [isFormatErr, setIsFormatErr] = useState(false);
   const [isImgUpdating, setIsImgUpdating] = useState(false);
   const [avatar, setAvatar] = useState(user.avatar || '');
@@ -33,9 +47,12 @@ export const Account = () => {
   const inputUploadHandler = async(e) => {
     setIsFormatErr(false);
 
-    if (e.target.files[0].type !== "image/jpeg") {
+    if (
+      e.target.files[0].type !== "image/jpeg"
+      ||e.target.files[0].type !== "image/png"
+    ) {
       setIsFormatErr(true);
-       toast.error("Upload only images");
+      toast.error("Upload only images");
       return;
     };
 
@@ -49,41 +66,41 @@ export const Account = () => {
   };
 
   return (
-    <>
-      <Container>
-        <TitleWrapper>
-          <BackButton onClick={() => navigation(-1)}>
-            <ArrowLeft />
-          </BackButton>
-          <TitleAccount>Your Profile</TitleAccount>
-        </TitleWrapper>
-        <ImgNameWrapper>
-          {isImgUpdating ? (
-            <Loader>
-              <LoaderCircle />
-            </Loader>
-          ) : (
-            <>
-              {isFormatErr && <Notification />}
-              <ProfileImg src={avatar || ""} alt='' accept='image/*' />
-              <form action='' encType='multipart/form-data'>
-                <input
-                  type='file'
-                  id='avatar'
-                  name='avatar'
-                  onChange={inputUploadHandler}
-                  hidden
-                />
-                <LabelImg htmlFor='avatar'>Choose image</LabelImg>
-              </form>
-            </>
-          )}
-          <UserNameText>{user.name}</UserNameText>
-        </ImgNameWrapper>
-        <AccountInnerNavigation />
-        <Outlet />
-      </Container>
-      <Footer />
-    </>
+      isRefreshing ? ('refreshing...'
+      ) : (
+          <><Container>
+            <TitleWrapper>
+              <BackButton onClick={() => navigation(-1)}>
+                <ArrowLeft />
+              </BackButton>
+              <TitleAccount>Your Profile</TitleAccount>
+            </TitleWrapper>
+            <ImgNameWrapper>
+              {isImgUpdating ? (
+                <Loader>
+                  <LoaderCircle />
+                </Loader>
+              ) : (
+                <>
+                  {isFormatErr && <Notification />}
+                  <ProfileImg src={avatar || ""} alt='' accept='image/*' />
+                  <form action='' encType='multipart/form-data'>
+                    <input
+                      type='file'
+                      id='avatar'
+                      name='avatar'
+                      onChange={inputUploadHandler}
+                      hidden />
+                    <LabelImg htmlFor='avatar'>Choose image</LabelImg>
+                  </form>
+                </>
+              )}
+              <UserNameText>{user.name}</UserNameText>
+            </ImgNameWrapper>
+            <AccountInnerNavigation />
+            <Outlet />
+          </Container > <Footer />
+          </>
+      )
   );
 };

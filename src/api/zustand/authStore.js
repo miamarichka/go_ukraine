@@ -23,11 +23,11 @@ const authStore = persist(
     isHasAccount: false,
     isRefreshing: false,
     isLoading: false,
-    isError: null,
+    isError: false,
     userReviews: [],
     registration: async (userData) => {
       try {
-        set({ isLoading: true, isError: null });
+        set({ isLoading: true, isError: false });
         const response = await axios.post(
           "https://go-ukraine-users.onrender.com/api/v1/users/signup",
           userData
@@ -41,11 +41,11 @@ const authStore = persist(
           });
           setAuthHeaders(response.data.token);
         }
-      } catch (error) {
+      } catch{
         set({
           currentUser: null,
           isLoggedIn: false,
-          isError: error,
+          isError: true,
         });
       } finally {
         set({ isLoading: false });
@@ -53,7 +53,7 @@ const authStore = persist(
     },
     logIn: async (logInData) => {
       try {
-        set({ isLoading: true, isError: null });
+        set({ isLoading: true, isError: false });
         const response = await axios.post(
           "https://go-ukraine-users.onrender.com/api/v1/users/login",
           logInData
@@ -65,22 +65,25 @@ const authStore = persist(
             token: response.data.token,
           });
           setAuthHeaders(response.data.token);
+          return true;
         } else {
           set({ isLoggedIn: false });
         }
-      } catch (error) {
+      } catch {
         set({
           currentUser: null,
           isLoggedIn: false,
-          isError: error,
+          isError: true,
         });
+        return false;
+
       } finally {
         set({ isLoading: false });
       }
     },
     uploadPicture: async(file) => {
       try {
-        set({ isLoading: true, isError: null });
+        set({ isLoading: true, isError: false });
 
         const response = await axios.patch(
           `https://go-ukraine-users.onrender.com/api/v1/users/avatar`,
@@ -96,9 +99,9 @@ const authStore = persist(
           set({ userImg: response.data.avatarURL });
           return response.data.avatarURL;
         }
-      } catch (error) {
+      } catch {
         set({
-          isError: error,
+          isError: true,
         });
       } finally {
         set({ isLoading: false });
@@ -106,7 +109,7 @@ const authStore = persist(
     },
     editData: async (newData) => {
       try {
-        set({ isLoading: true, isError: null });
+        set({ isLoading: true, isError: false });
 
         const response = await axios.put(
           `https://go-ukraine-users.onrender.com/api/v1/users/edit`,
@@ -115,9 +118,9 @@ const authStore = persist(
         if (response.status === 200) {
           set({ currentUser: { ...get().currentUser, ...response.data, } });
         }
-      } catch (error) {
+      } catch {
         set({
-          isError: error,
+          isError: false,
         });
       } finally {
         set({ isLoading: false });
@@ -139,7 +142,7 @@ const authStore = persist(
       setAuthHeaders(token);
 
       try {
-        set({ isLoading: true, isError: null });
+        set({ isLoading: true, isError: false });
         const responce = await axios.get('https://go-ukraine-users.onrender.com/api/v1/users/current');
         if (responce.status === 200) {
 
@@ -152,6 +155,7 @@ const authStore = persist(
                 avatar: responce.data.avatarURL,
               },
             });
+            return responce.data.avatarURL
           } else {
             set({
               isLoggedIn: true,
@@ -162,9 +166,9 @@ const authStore = persist(
             });
           }
         }
-      } catch (error) {
+      } catch {
         set({
-          isError: error,
+          isError: true,
         });
       } finally {
         set({ isLoading: false });
@@ -172,7 +176,7 @@ const authStore = persist(
     },
     logOut: async () => {
       try {
-        set({ isLoading: true, isError: null });
+        set({ isLoading: true, isError: false });
         const responce = await axios.post('https://go-ukraine-users.onrender.com/api/v1/users/logout');
         if (responce.status === 200) {
           clearAuthHeader();
@@ -182,9 +186,9 @@ const authStore = persist(
             isLoggedIn: false,
           })
         }
-      } catch (error) {
+      } catch {
         set({
-          isError: error,
+          isError: true,
         });
       } finally {
         set({ isLoading: false });

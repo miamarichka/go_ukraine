@@ -22,9 +22,13 @@ import { useAuth } from "../../api/zustand/useAuth";
 import { EMAIL_REGEX } from "../../utils/patterns";
 import { Notification } from "../Notification/Notifications";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 export const LoginForm = () => {
+  const navigate = useNavigate();
+
   const { isError, isLoading } = useAuth();
+
   const logIn = useAuthStore((state) => state.logIn);
   const hasntAccount = useAuthStore((state) => state.hasntAccount);
 
@@ -43,9 +47,12 @@ export const LoginForm = () => {
   };
 
   const SubmitHandler = async (values) => {
-    await logIn(values);
-    if (isError) {
-       toast.error("Email or password wrong");
+    const result = await logIn(values);
+    if (result) {
+      console.log('navigate', result);
+      navigate("/account/editprofile", { replace: true });
+    } else {
+      toast.error("Email or password wrong");
     }
   };
 
@@ -53,7 +60,7 @@ export const LoginForm = () => {
     hasntAccount();
   }
 
-const showError = isError && !isLoading
+  const showError = isError && !isLoading
 
   return (
     <FormContainer>
