@@ -12,8 +12,10 @@ import { useAuth } from '../../api/zustand/useAuth';
 import { EMAIL_REGEX } from '../../utils/patterns';
 import { Notification} from '../Notification/Notifications';
 import { toast } from "react-toastify";
+import { useNavigate } from 'react-router';
 
 export const SignUpForm = () => {
+    const navigate = useNavigate();
   const registerUser = useAuthStore((state) => state.registration);
   const hasAccount = useAuthStore(state => state.hasAccount);
   const { isError, isLoading } = useAuth();
@@ -39,12 +41,12 @@ export const SignUpForm = () => {
   };
 
   const SubmitHandler = async (values) => {
-    await registerUser(values);
-    if (isError) {
-      hasAccount();
-    } else {
-      toast.error("Incorrect data");
-      }
+    const result = await registerUser(values);
+        if (result) {
+          navigate("/account/editprofile", { replace: true });
+        } else {
+          toast.error("Email or password wrong");
+        }
   };
 
   const showError = isError && !isLoading;

@@ -24,6 +24,8 @@ import FavoriteContext from "../../../api/context/favoriteContext";
 import { useAuth } from "../../../api/zustand/useAuth";
 import { cutTextDesc, getRandomRating } from "../../../utils/functionsHelpers";
 import { useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Notification } from "../../Notification/Notifications";
 
 export const RestaurantItem = ({
   image,
@@ -58,11 +60,14 @@ export const RestaurantItem = ({
     }
   };
 
+  const notify = () => toast.info('This information not available yet');
+
   const isRender = selectedCategory === cuisine || !selectedCategory;
 
   return (
     isRender && (
       <RestaurantBox>
+        <Notification />
         <ImgWrapper>
           <RestaurantImage src={image} alt={name} />
           {isLoggedIn &&
@@ -104,7 +109,7 @@ export const RestaurantItem = ({
                 <CuisinesItem>European</CuisinesItem>
               </CuisinesList>
             </div>
-            <BtnStyled>Open in Maps</BtnStyled>
+            <BtnStyled onClick={notify}>Open in Maps</BtnStyled>
           </RestaurantCuisinesBox>
         </RestaurantDetailsBox>
       </RestaurantBox>

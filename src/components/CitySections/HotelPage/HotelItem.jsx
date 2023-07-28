@@ -26,6 +26,8 @@ import {
 import { useAuth } from "../../../api/zustand/useAuth";
 import FavoriteContext from "../../../api/context/favoriteContext";
 import { cutTextDesc } from "../../../utils/functionsHelpers";
+import { Notification } from "../../Notification/Notifications";
+import { toast } from "react-toastify";
 
 export const HotelItem = ({
   name,
@@ -63,8 +65,12 @@ export const HotelItem = ({
       favoriteContext.addFavoriteItem(favoriteHotel);
     }
   };
+
+  const notify = () => toast.info('This information not available yet');
+
   return (
     <HotelBox>
+      <Notification />
       <ImageWrapper>
         <HotelImage src={image} alt={name} />
         {isLoggedIn &&
@@ -81,7 +87,7 @@ export const HotelItem = ({
         </TextSvgBox>
         <HotelDescription>
           {cutTextDesc(description)}
-          <MoreLink to={deal}>MORE</MoreLink>
+          <MoreLink onClick={notify}>MORE</MoreLink>
         </HotelDescription>
         <TextSvgBox>
           <LocationSvg />
@@ -100,9 +106,7 @@ export const HotelItem = ({
           <Currency>UAH</Currency>
           <Price>{price}</Price>
         </PriceWrapper>
-        <ViewDealLink to={deal} target='_blank'>
-          View Deal
-        </ViewDealLink>
+        <ViewDealLink onClick={notify}>View Deal</ViewDealLink>
       </HotelPriceBox>
     </HotelBox>
   );

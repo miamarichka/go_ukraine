@@ -49,7 +49,6 @@ export const LoginForm = () => {
   const SubmitHandler = async (values) => {
     const result = await logIn(values);
     if (result) {
-      console.log('navigate', result);
       navigate("/account/editprofile", { replace: true });
     } else {
       toast.error("Email or password wrong");

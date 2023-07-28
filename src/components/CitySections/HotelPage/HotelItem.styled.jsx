@@ -80,7 +80,7 @@ export const StarsSvg = styled(Stars)`
 margin-left: 8px;
 `;
 
-export const ViewDealLink = styled(Link)`
+export const ViewDealLink = styled.button`
 display: block;
 text-align: center;
 padding: 17px 69px 17px 69px;

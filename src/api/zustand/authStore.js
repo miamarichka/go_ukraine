@@ -40,6 +40,7 @@ const authStore = persist(
             token: response.data.token
           });
           setAuthHeaders(response.data.token);
+          return true;
         }
       } catch{
         set({
@@ -47,6 +48,7 @@ const authStore = persist(
           isLoggedIn: false,
           isError: true,
         });
+        return false;
       } finally {
         set({ isLoading: false });
       }
@@ -141,7 +143,20 @@ const authStore = persist(
     }),
     refreshUser: async () => {
       const token = get().token;
-      if (!token) return;
+      if (!token) {
+        set({
+          isLoggedIn: false,
+          isError: true,
+            currentUser: {
+              name: null,
+              email: null,
+              password: null,
+              avatar: '',
+            },
+            token: null,
+        });
+        return new Error('No valid token')
+      };
       setAuthHeaders(token);
 
       try {
