@@ -34,11 +34,17 @@ export const LeaveReviewBtn = () => {
 
   useEffect(() => {
     window.addEventListener("keydown", modalHandler);
+    if (isOpenModal) {
+      document.body.classList.add("modal-open");
+    } else {
+      document.body.classList.remove("modal-open");
+    }
 
     return () => {
       window.removeEventListener("keydown", modalHandler);
+      document.body.classList.remove("modal-open");
     };
-  }, [modalHandler]);
+  }, [isOpenModal, modalHandler]);
 
   return (
     <>
